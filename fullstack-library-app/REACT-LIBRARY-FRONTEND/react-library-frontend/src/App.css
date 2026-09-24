@@ -34,7 +34,7 @@
 .lost-image {
   background-image: url("./assets/home-page-images/image-3.jpg");
   height: 25em !important;
-  width: "720"
+  width: 720px;
 }
 
 .homepage-carousel-title {
