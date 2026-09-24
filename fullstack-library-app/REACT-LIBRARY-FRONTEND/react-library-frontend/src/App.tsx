@@ -3,6 +3,7 @@ import {NavigationBar} from "./layouts/navigation-bars/NavigationBar"
 import {ExploreTopBooks} from "./layouts/home-page/ExploreTopBooks";
 import {Carousel} from "./layouts/home-page/Carousel.tsx";
 import {Heros} from "./layouts/home-page/Heros.tsx";
+import {LibraryServices} from "./layouts/home-page/LibraryServices.tsx";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <ExploreTopBooks/>
           <Carousel/>
           <Heros/>
+          <LibraryServices/>
 
 
       </>
