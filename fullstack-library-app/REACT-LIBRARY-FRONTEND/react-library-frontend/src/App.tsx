@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+
 import './App.css'
+import {NavigationBar} from "./layouts/navigation-bars/NavigationBar"
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <h1>Welcome to the library app </h1>
+    <NavigationBar/>
   )
 }
 
