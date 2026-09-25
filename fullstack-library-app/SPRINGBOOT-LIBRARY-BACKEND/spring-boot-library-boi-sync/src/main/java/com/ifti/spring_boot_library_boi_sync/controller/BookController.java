@@ -2,11 +2,10 @@ package com.ifti.spring_boot_library_boi_sync.controller;
 
 import com.ifti.spring_boot_library_boi_sync.entity.Book;
 import com.ifti.spring_boot_library_boi_sync.service.BookService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -20,9 +19,10 @@ public class BookController {
 
     @ResponseStatus(HttpStatus.OK)
    @GetMapping
-    public List<Book> getAllBooks()
+    public Page<Book> getAllBooks(@RequestParam(defaultValue = "0") int pageNo,
+                                  @RequestParam(defaultValue = "5") int pageSize)
     {
-        return bookService.getAllBooks();
+        return bookService.getAllBooks(pageNo,pageSize);
     }
 
 

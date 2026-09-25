@@ -1,10 +1,10 @@
 package com.ifti.spring_boot_library_boi_sync.service;
 
 import com.ifti.spring_boot_library_boi_sync.entity.Book;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 
 public interface BookService {
 
-    List<Book> getAllBooks();
+    Page<Book> getAllBooks(int pageNo, int pageSize);
 }
