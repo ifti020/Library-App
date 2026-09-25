@@ -1,6 +1,6 @@
 package com.ifti.spring_boot_library_boi_sync.service;
 
-import com.ifti.spring_boot_library_boi_sync.entity.Books;
+import com.ifti.spring_boot_library_boi_sync.entity.Book;
 import com.ifti.spring_boot_library_boi_sync.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Books> getAllBooks() {
+    public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 }

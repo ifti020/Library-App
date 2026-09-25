@@ -3,8 +3,8 @@ package com.ifti.spring_boot_library_boi_sync.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="books")
-public class Books {
+@Table(name="book")
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
