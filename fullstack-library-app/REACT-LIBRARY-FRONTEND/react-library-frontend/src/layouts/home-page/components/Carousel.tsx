@@ -1,4 +1,19 @@
+import {useEffect} from "react";
+
 export const Carousel = () => {
+
+  useEffect(() => {
+    const fetchBooks = async ()=>{
+      console.log("Fetch Books");
+    };
+    fetchBooks();
+
+
+  }, []);
+
+
+
+
   return (
     <div className="container mt-5">
       <div className="homepage-carousel-title">
