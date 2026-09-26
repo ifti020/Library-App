@@ -13,26 +13,40 @@ interface BookResponse{
 export const Carousel = () => {
   // now we create an endpoint that fetches the data form the spring boot api endpoint and returns the books we need.
   const [books,setBooks] = useState<BooKModel[]>([]);
+  const [isLoading, setIsLoading] = useState(true)
+  const [httpError, setHttpError] = useState<string | null>()
+
 
   useEffect(() => {
     const fetchBooks = async ()=> {
-      const response = await fetch(
-          "http://localhost:8080/api/books?pageNo=0&pagesize=3"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch books.");
+      try {
+        const response = await fetch(
+            "http://localhost:8080/api/books?pageNo=0&pagesize=3"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch books.");
+        }
+
+        const data: BookResponse = await response.json();
+        setBooks(data.content);
+        setIsLoading(false);
+      } catch(error){
+        setIsLoading(false);
+        setHttpError(error instanceof Error ? error.message : "An error occurred.");
       }
-
-      const data: BookResponse = await response.json();
-      setBooks(data.content);
-
     };
     fetchBooks();
 
 
   }, []);
 
+    if(isLoading) {
+      return <p>Loading...</p>;
+    }
 
+    if (httpError) {
+      return <div>{httpError}</div>
+    }
 
 
   return (
