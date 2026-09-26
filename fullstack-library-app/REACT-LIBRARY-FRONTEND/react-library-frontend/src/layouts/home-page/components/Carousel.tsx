@@ -1,10 +1,35 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import type {BooKModel} from "../../../models/BookModel.ts";
+
+
+interface BookResponse{
+  content: BooKModel[];
+  page:{
+    totalElements: number;
+    totalPage: number;
+  };
+}
 
 export const Carousel = () => {
 
   useEffect(() => {
     const fetchBooks = async ()=>{
-      console.log("Fetch Books");
+      // console.log("Fetch Books");
+      // now we create an endpoint that fetches the data form the spring boot api endpoint and returns the books we need.
+
+      const [books,setBooks] = useState<BooKModel[]>([]);
+      const response = await fetch  (
+          "http://localhost:8080/api/books?pageNo=0&pagesize=3"
+      );
+      if (!response.ok)
+      {
+        throw new Error("Failed to fetch books.");
+      }
+
+      const data: BookResponse = await response.json();
+
+      setBooks(response.content);
+
     };
     fetchBooks();
 
