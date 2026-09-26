@@ -11,24 +11,20 @@ interface BookResponse{
 }
 
 export const Carousel = () => {
+  // now we create an endpoint that fetches the data form the spring boot api endpoint and returns the books we need.
+  const [books,setBooks] = useState<BooKModel[]>([]);
 
   useEffect(() => {
-    const fetchBooks = async ()=>{
-      // console.log("Fetch Books");
-      // now we create an endpoint that fetches the data form the spring boot api endpoint and returns the books we need.
-
-      const [books,setBooks] = useState<BooKModel[]>([]);
-      const response = await fetch  (
+    const fetchBooks = async ()=> {
+      const response = await fetch(
           "http://localhost:8080/api/books?pageNo=0&pagesize=3"
       );
-      if (!response.ok)
-      {
+      if (!response.ok) {
         throw new Error("Failed to fetch books.");
       }
 
       const data: BookResponse = await response.json();
-
-      setBooks(response.content);
+      setBooks(data.content);
 
     };
     fetchBooks();
@@ -52,18 +48,19 @@ export const Carousel = () => {
       >
         {/* Desktop */}
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          {books.map((book,index) =>(
+          <div key={book.id} className={`carousel-item ${index === 0 ? 'active':'' } `}>
             <div className="row d-flex justify-content-center align-items-center">
               <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
                 <div className="text-center">
                   <img
-                    src={"/images/book-images/book-1.png"}
+                    src={book.img}
                     width="151"
                     height="233"
                     alt="book"
                   />
-                  <h6 className="mt-2">Book</h6>
-                  <p>BoiSync</p>
+                  <h6 className="mt-2">{book.title}</h6>
+                  <p>{book.author}</p>
                   <a className="btn main-color text-white" href="#">
                     Reserve
                   </a>
@@ -71,44 +68,10 @@ export const Carousel = () => {
               </div>
             </div>
           </div>
-          <div className="carousel-item">
-            <div className="row d-flex justify-content-center align-items-center">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div className="text-center">
-                  <img
-                    src={"/images/book-images/book-2.png"}
-                    width="151"
-                    height="233"
-                    alt="book"
-                  />
-                  <h6 className="mt-2">Book</h6>
-                  <p>BoiSync</p>
-                  <a className="btn main-color text-white" href="#">
-                    Reserve
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div className="row d-flex justify-content-center align-items-center">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div className="text-center">
-                  <img
-                    src={"/images/book-images/book-3.png"}
-                    width="151"
-                    height="233"
-                    alt="book"
-                  />
-                  <h6 className="mt-2">Book</h6>
-                  <p>BoiSync</p>
-                  <a className="btn main-color text-white" href="#">
-                    Reserve
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          ))}
+
+
           <button
             className="carousel-control-prev"
             type="button"
