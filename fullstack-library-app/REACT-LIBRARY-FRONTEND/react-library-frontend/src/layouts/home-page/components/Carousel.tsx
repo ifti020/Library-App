@@ -102,20 +102,23 @@ export const Carousel = () => {
       {/* Mobile */}
       <div className="d-lg-none mt-3">
         <div className="row d-flex justify-content-center align-items-center">
+          {books.length > 0 && (
           <div className="text-center">
             <img
-              src={"/images/book-images/book-1.png"}
+              src={books[0].img}
               width="151"
               height="233"
               alt="book"
             />
-            <h6 className="mt-2">Book</h6>
-            <p>BoiSync</p>
+            <h6 className="mt-2">{books[0].title}</h6>
+            <p>{books[0].author}</p>
             <a className="btn main-color text-white" href="#">
               Reserve
             </a>
           </div>
+          )}
         </div>
+
       </div>
       <div className="homepage-carousel-title mt-3">
         <a className="btn btn-outline-secondary btn-lg" href="#">
