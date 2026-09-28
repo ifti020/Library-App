@@ -3,6 +3,7 @@ import {SearchBook} from "./components/SearchBook.tsx";
 import {useEffect, useState} from "react";
 import {bookService} from "../../services/bookService.ts";
 import {SpinnerLoading} from "../../componenets/SpinnerLoading.tsx";
+import {Pagination} from "../../componenets/Pagination.tsx";
 
 export const SearchBooksPage = () => {
 
@@ -117,6 +118,11 @@ export const SearchBooksPage = () => {
           {books.map((book) => (
             <SearchBook book={book} key={book.id} />
           ))}
+          {totalPages > 1 &&(
+              <Pagination currentPage={currentPage}
+                          totalPages={totalPages}
+                          paginate={setCurrentPage}/>
+          )}
         </div>
       </div>
     </>

@@ -52,3 +52,19 @@
   pointer-events: none;
   cursor: default;
 }
+
+/*added style for pagination*/
+.pagination .page-link {
+  color:  #adb5bd;
+}
+
+.pagination .page-link:hover {
+  color: #228B22;
+  border-color: #228B22;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #228B22;
+  border-color: #228B22;
+  color: white;
+}
