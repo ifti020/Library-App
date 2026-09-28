@@ -21,7 +21,7 @@ export const bookService = {
         return await response.json();
     },
 
-    async searchBooksByTitle(title: string, pageNo: number, pageSize: number): Promise<BookResponse[]> {
+    async searchBooksByTitle(title: string, pageNo: number, pageSize: number): Promise<BookResponse> {
         const response = await fetch(
             `${BASE_URL}/books/search/title?title=${title}&pageNo=${pageNo}&pagesize=${pageSize}`
         );
@@ -32,7 +32,7 @@ export const bookService = {
     },
 
 
-    async searchBooksByCategory(category: string, pageNo: number, pageSize: number): Promise<BookResponse[]> {
+    async searchBooksByCategory(category: string, pageNo: number, pageSize: number): Promise<BookResponse> {
         const response = await fetch(
             `${BASE_URL}/books/search/category?category=${category}&pageNo=${pageNo}&pagesize=${pageSize}`
         );
