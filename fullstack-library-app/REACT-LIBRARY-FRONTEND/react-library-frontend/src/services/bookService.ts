@@ -19,5 +19,16 @@ export const bookService = {
         }
 
         return await response.json();
+    },
+
+    async searchBooksByTitle(title: string, pageNo: number, pageSize: number): Promise<BookResponse[]> {
+        const response = await fetch(
+            `${BASE_URL}/books/search/title?title=${title}&pageNo=${pageNo}&pagesize=${pageSize}`
+        );
+        if(!response.ok) {
+            throw new Error("Failed to search books.");
+        }
+        return await response.json();
     }
+
 }
