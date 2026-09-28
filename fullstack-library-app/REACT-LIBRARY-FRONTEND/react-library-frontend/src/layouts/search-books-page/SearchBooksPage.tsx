@@ -1,6 +1,8 @@
-import type { BookModel } from "../../models/BookModel";
+import type {BooKModel} from "../../models/BookModel.ts";
+import {SearchBook} from "./components/SearchBook.tsx";
 
-const dummyBooks: BookModel[] = [
+
+const dummyBooks: BooKModel[] = [
   {
     id: 1,
     author: "Author One",
@@ -95,64 +97,7 @@ export const SearchBooksPage = () => {
           <p>1 to 3 of 3 items:</p>
 
           {dummyBooks.map((dummyBook) => (
-            <div
-              className="card mt-3 shadow p-3 mb-3 bg-body rounded"
-              key={dummyBook.id}
-            >
-              <div className="row g-0">
-                <div className="col-md-2">
-                  <div className="d-none d-lg-block">
-                    {dummyBook.img ? (
-                      <img
-                        src={dummyBook.img}
-                        width="123"
-                        height="196"
-                        alt={`Cover of ${dummyBook.title}`}
-                      />
-                    ) : (
-                      <img
-                        src={"/images/book-images/book-1.png"}
-                        width="123"
-                        height="196"
-                        alt="Book"
-                      />
-                    )}
-                  </div>
-
-                  <div className="d-lg-none d-flex justify-content-center align-items-center">
-                    {dummyBook.img ? (
-                      <img
-                        src={dummyBook.img}
-                        width="123"
-                        height="196"
-                        alt={`Cover of ${dummyBook.title}`}
-                      />
-                    ) : (
-                      <img
-                        src={"/images/book-images/book-1.png"}
-                        width="123"
-                        height="196"
-                        alt="Book"
-                      />
-                    )}
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="card-body">
-                    <h5 className="card-title">{dummyBook.author}</h5>
-                    <h4>{dummyBook.title}</h4>
-                    <p className="card-text">{dummyBook.description}</p>
-                  </div>
-                </div>
-
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <a className="btn btn-md main-color text-white" href="#">
-                    View Details
-                  </a>
-                </div>
-              </div>
-            </div>
+            <SearchBook book={dummyBook} key={dummyBook.id} />
           ))}
         </div>
       </div>
