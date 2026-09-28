@@ -2,19 +2,32 @@ import type {BooKModel} from "../../models/BookModel.ts";
 import {SearchBook} from "./components/SearchBook.tsx";
 import {useEffect, useState} from "react";
 import {bookService} from "../../services/bookService.ts";
+import {SpinnerLoading} from "../../componenets/SpinnerLoading.tsx";
 
 export const SearchBooksPage = () => {
   const [books,setBooks] = useState<BooKModel[]>([]);
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [httpError, setHttpError] = useState<string | null >(null);
   useEffect(() => {
     const fetchBooks = async () => {
       try{
         const data = await bookService.getBooks(0,5);
         setBooks(data.content);
-      } catch (error) {}
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setHttpError(error instanceof Error ? error.message : "An error occurred");
+      }
     };
     fetchBooks();
   },[]);
+
+  if (isLoading) {
+    return <SpinnerLoading/>
+  }
+  if (httpError) {
+    return <div>{httpError}</div>
+  }
 
 
   return (
