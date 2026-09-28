@@ -40,6 +40,17 @@ public class BookController {
         return  bookService.findByTitleContaining(title,pageNo, pageSize);
     }
 
+    //rest api for Search by Category
+    @GetMapping("/search/category")
+    @ResponseStatus(HttpStatus.OK)
+    public Page <Book> findByCategoryContaining(
+            @RequestParam String category,
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "5") int pageSize)
+    {
+        return bookService.findByCategoryContaining(category,pageNo,pageSize);
+    }
+
 
 
 }

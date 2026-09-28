@@ -38,4 +38,10 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findByTitleContaining(title,pageable);
 
     }
+
+    @Override
+    public Page<Book> findByCategoryContaining(String category, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return bookRepository.findByCategoryContaining(category, pageable);
+    }
 }
