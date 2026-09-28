@@ -14,8 +14,11 @@ import java.util.List;
 public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
+
+
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
+
     }
 
 
@@ -25,5 +28,14 @@ public class BookServiceImpl implements BookService{
         Pageable pageable = PageRequest.of(pageNo,pageSize);
 
         return bookRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Book> findByTitleContaining(String title, int pageNo, int pageSize)
+    {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        return bookRepository.findByTitleContaining(title,pageable);
+
     }
 }
