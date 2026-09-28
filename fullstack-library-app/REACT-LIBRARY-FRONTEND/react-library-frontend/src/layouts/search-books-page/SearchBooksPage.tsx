@@ -10,6 +10,15 @@ export const SearchBooksPage = () => {
 
   const BOOKS_PER_PAGE = 5;
 
+  //immutabe list
+  const CATEGORIES =[
+    {label: 'All', value: 'All'},
+    {label: 'Front End', value: 'FE'},
+    {label: 'Back End', value: 'BE'},
+    {label: 'Data', value: 'Data'},
+    {label: 'DevOps', value: 'DevOps'},
+  ] as const;
+
   const [books,setBooks] = useState<BooKModel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [httpError, setHttpError] = useState<string | null >(null);
@@ -20,6 +29,7 @@ export const SearchBooksPage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm , setSearchTerm] = useState("");
 
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -29,6 +39,14 @@ export const SearchBooksPage = () => {
         if(searchTerm){
           data = await bookService.searchBooksByTitle(
               searchTerm,
+              pageNo,
+              BOOKS_PER_PAGE
+          );
+        }
+        else if( selectedCategory!== "All")
+        {
+          data = await bookService.searchBooksByCategory(
+              selectedCategory,
               pageNo,
               BOOKS_PER_PAGE
           );
@@ -49,11 +67,12 @@ export const SearchBooksPage = () => {
       }
     };
     fetchBooks();
-  },[currentPage, searchTerm]);
+  },[currentPage, searchTerm, selectedCategory]);
 
   const handleSearch = useCallback(() => {
     setCurrentPage(1);
     setSearchTerm(searchInput);
+    setSelectedCategory("All");
   }, [setCurrentPage, searchInput]);
 
   const handleInputKeyDown = useCallback(
@@ -63,6 +82,17 @@ export const SearchBooksPage = () => {
         }
       }, [handleSearch]
   );
+
+  const handleCategorySelect = useCallback(
+      (value: string) => {
+        setCurrentPage(1);
+        setSelectedCategory(value);
+        setSearchTerm("");
+        setSearchInput("");
+      },
+      [setCurrentPage]
+  );
+
   if (isLoading) {
     return <SpinnerLoading/>
   }
@@ -103,38 +133,20 @@ export const SearchBooksPage = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Category
+                  {selectedCategory}
                 </button>
 
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton1"
                 >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      All
-                    </a>
+                  {CATEGORIES.map((cat) =>(
+                  <li key={cat.value} onClick={()=>handleCategorySelect(cat.value)}>
+                    <a className ="dropdown-item"
+                      href="#">{cat.label}</a>
+
                   </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Front End
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Back End
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Data
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      DevOps
-                    </a>
-                  </li>
+                  ))}
                 </ul>
               </div>
             </div>

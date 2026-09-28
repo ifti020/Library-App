@@ -29,6 +29,17 @@ export const bookService = {
             throw new Error("Failed to search books.");
         }
         return await response.json();
+    },
+
+
+    async searchBooksByCategory(category: string, pageNo: number, pageSize: number): Promise<BookResponse[]> {
+        const response = await fetch(
+            `${BASE_URL}/books/search/category?category=${category}&pageNo=${pageNo}&pagesize=${pageSize}`
+        );
+        if(!response.ok) {
+            throw new Error("Failed to search books by category.");
+        }
+        return await response.json();
     }
 
 }
