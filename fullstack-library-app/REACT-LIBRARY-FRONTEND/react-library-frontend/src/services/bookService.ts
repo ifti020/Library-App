@@ -4,7 +4,7 @@ interface BookResponse{
     content: BooKModel[];
     page:{
         totalElements: number;
-        totalPage: number;
+        totalPages: number;
     };
 }
 
