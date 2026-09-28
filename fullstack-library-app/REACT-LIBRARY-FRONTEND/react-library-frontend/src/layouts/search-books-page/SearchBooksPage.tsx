@@ -1,32 +1,22 @@
 import type {BooKModel} from "../../models/BookModel.ts";
 import {SearchBook} from "./components/SearchBook.tsx";
-
-
-const dummyBooks: BooKModel[] = [
-  {
-    id: 1,
-    author: "Author One",
-    title: "Book Title One",
-    description: "Description for book one.",
-    img: "/images/book-images/book-1.png",
-  },
-  {
-    id: 2,
-    author: "Author Two",
-    title: "Book Title Two",
-    description: "Description for book two.",
-    img: "/images/book-images/book-2.png",
-  },
-  {
-    id: 3,
-    author: "Author Three",
-    title: "Book Title Three",
-    description: "Description for book three.",
-    img: "/images/book-images/book-3.png",
-  },
-];
+import {useEffect, useState} from "react";
+import {bookService} from "../../services/bookService.ts";
 
 export const SearchBooksPage = () => {
+  const [books,setBooks] = useState<BooKModel[]>([]);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try{
+        const data = await bookService.getBooks(0,5);
+        setBooks(data.content);
+      } catch (error) {}
+    };
+    fetchBooks();
+  },[]);
+
+
   return (
     <>
       <div className="container">
@@ -96,8 +86,8 @@ export const SearchBooksPage = () => {
 
           <p>1 to 3 of 3 items:</p>
 
-          {dummyBooks.map((dummyBook) => (
-            <SearchBook book={dummyBook} key={dummyBook.id} />
+          {books.map((book) => (
+            <SearchBook book={book} key={book.id} />
           ))}
         </div>
       </div>
