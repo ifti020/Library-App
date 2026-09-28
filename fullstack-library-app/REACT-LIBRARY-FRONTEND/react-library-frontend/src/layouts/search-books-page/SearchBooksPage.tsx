@@ -26,13 +26,14 @@ export const SearchBooksPage = () => {
         setTotalPages(data.page.totalPages);
 
         setIsLoading(false);
+        window.scrollTo(0, 0);
       } catch (error) {
         setIsLoading(false);
         setHttpError(error instanceof Error ? error.message : "An error occurred");
       }
     };
     fetchBooks();
-  },[]);
+  },[currentPage]);
 
   if (isLoading) {
     return <SpinnerLoading/>
