@@ -51,6 +51,11 @@ public class BookController {
         return bookService.findByCategoryContaining(category,pageNo,pageSize);
     }
 
-
+    //rest api for Get Book by Id
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable long id){
+        return bookService.getBookById(id);
+    }
 
 }
