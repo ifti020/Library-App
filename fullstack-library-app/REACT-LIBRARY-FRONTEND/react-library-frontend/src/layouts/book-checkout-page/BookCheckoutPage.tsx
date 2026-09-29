@@ -58,7 +58,7 @@ export const BookCheckoutPage = () => {
               <p className="lead">{book?.description}</p>
             </div>
           </div>
-          <CheckoutBox/>
+          <CheckoutBox book={book!}/>
         </div>
         <hr />
       </div>
@@ -79,7 +79,7 @@ export const BookCheckoutPage = () => {
             <p className="lead">{book?.description}</p>
           </div>
         </div>
-        <CheckoutBox/>
+        <CheckoutBox book={book!}/>
         <hr/>
       </div>
     </>
