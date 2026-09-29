@@ -1,3 +1,5 @@
+import {NavLink} from "react-router-dom";
+
 export const Footer = () => {
     return (
         <div className='main-color'>
@@ -6,14 +8,14 @@ export const Footer = () => {
                 <p className='col-md-4 mb-0 text-white'> © 2026 BoiSync App. Developed by Ifti Haque.</p>
                 <ul className='nav navbar-dark col-md-4 justify-content-end'>
                     <li className='nav-item'>
-                        <a href='#' className='nav-link px-2 text-white'>
+                        <NavLink to="/" className='nav-link px-2 text-white'>
                             Home
-                        </a>
+                        </NavLink>
                     </li>
                     <li className='nav-item'>
-                        <a href='#' className='nav-link px-2 text-white'>
+                        <NavLink to="/search" className='nav-link px-2 text-white'>
                             Search Books
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </footer>
