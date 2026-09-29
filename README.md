@@ -104,5 +104,5 @@ The current version focuses on the book browsing, search, filtering, pagination,
 **BoiSync** is an ongoing project focused on building an online library platform using React and Spring Boot. The current implementation provides core book browsing and discovery functionality, with additional lending, review, and management features planned as development continues.
 
 
-https://github.com/user-attachments/assets/933d80b2-ea2d-49d3-926f-6d7fede7354a
+
 
