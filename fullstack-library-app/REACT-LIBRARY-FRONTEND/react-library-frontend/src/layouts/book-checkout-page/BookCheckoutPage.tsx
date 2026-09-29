@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import type {BooKModel} from "../../models/BookModel.ts";
 import {bookService} from "../../services/bookService.ts";
 import {SpinnerLoading} from "../../componenets/SpinnerLoading.tsx";
+import {CheckoutBox} from "./components/CheckoutBox.tsx";
 
 export const BookCheckoutPage = () => {
 
@@ -57,6 +58,7 @@ export const BookCheckoutPage = () => {
               <p className="lead">{book?.description}</p>
             </div>
           </div>
+          <CheckoutBox/>
         </div>
         <hr />
       </div>
@@ -77,7 +79,8 @@ export const BookCheckoutPage = () => {
             <p className="lead">{book?.description}</p>
           </div>
         </div>
-        <hr />
+        <CheckoutBox/>
+        <hr/>
       </div>
     </>
   );
