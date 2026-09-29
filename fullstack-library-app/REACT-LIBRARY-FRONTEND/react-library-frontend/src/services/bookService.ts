@@ -40,6 +40,15 @@ export const bookService = {
             throw new Error("Failed to search books by category.");
         }
         return await response.json();
+    },
+
+//     service for get books by id
+    async getBookById(id: string): Promise<BooKModel> {
+        const response = await fetch(`${BASE_URL}/books/${id}`);
+        if(!response.ok) {
+            throw new Error("Failed to fetch books details.");
+        }
+        return await response.json();
     }
 
 }
