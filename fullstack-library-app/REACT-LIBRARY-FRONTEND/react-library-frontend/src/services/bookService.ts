@@ -62,7 +62,7 @@ export const bookService = {
         return await response.json();
     },
 //     service for get book reviews
-    async getBookReviewsById(bookId: string): Promise<BookResponse> {
+    async getBookReviewsById(bookId: string): Promise<ReviewResponse> {
 
         const response = await fetch(`${BASE_URL}/reviews/book/${bookId}`);
         if(!response.ok) {

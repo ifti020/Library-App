@@ -5,9 +5,8 @@ import {Link} from "react-router-dom";
 
 interface  LatestReviewsProp{
     reviews:ReviewModel[];
-    bookId: number;
+    bookId?: number;
 }
-
 
 export const LatestReviews : React.FC<LatestReviewsProp> = ({
     reviews,
@@ -24,7 +23,7 @@ export const LatestReviews : React.FC<LatestReviewsProp> = ({
                         {reviews.slice(0,3).map((eachReview)=>(
                             <Review key={eachReview.id} review={eachReview} />
                         ))}
-                        <div className="mt-3">
+                        <div className="m-3">
                             <Link type="button" className="btn main-color btn-md text-white"
                                   to={`/reviewList/${bookId}`}>
                                 Read all reviews

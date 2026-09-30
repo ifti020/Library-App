@@ -6,8 +6,8 @@ interface ReviewProps{
 }
 
 export const Review: React.FC<ReviewProps> = ({review}) => {
-    const data = new Date(review.date);
-    const longMonth = data.toLocaleDateString("en-US", {month: "long"});
+    const date = new Date(review.date);
+    const longMonth = date.toLocaleDateString("en-US", {month: "long"});
     const dateDay = date.getDate();
     const dateYear = date.getFullYear();
     const dateRender = `${longMonth}-${dateDay}-${dateYear}`;

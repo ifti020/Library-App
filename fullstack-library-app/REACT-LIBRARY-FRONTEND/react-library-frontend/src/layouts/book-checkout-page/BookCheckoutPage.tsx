@@ -3,10 +3,14 @@ import type {BooKModel} from "../../models/BookModel.ts";
 import {bookService} from "../../services/bookService.ts";
 import {SpinnerLoading} from "../../componenets/SpinnerLoading.tsx";
 import {CheckoutBox} from "./components/CheckoutBox.tsx";
+import type {ReviewModel} from "../../models/ReviewModel.ts";
+import {LatestReviews} from "./components/LatestReviews.tsx";
 
 export const BookCheckoutPage = () => {
 
   const bookId = window.location.pathname.split("/")[2];
+  const [reviews, setReviews] = useState<ReviewModel[]> ([]);
+
   const [book, setBook] = useState<BooKModel>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [httpError, setHttpError] = useState<string | null>(null);
@@ -14,9 +18,14 @@ export const BookCheckoutPage = () => {
   useEffect(() => {
     const fetchBook = async () =>{
       try{
-        const responseJson = await bookService.getBookById(bookId);
+        const [bookData,reviewsData ] = await Promise.all([
+            bookService.getBookById(bookId),
+            bookService.getBookReviewsById(bookId),
+      ]);
+        setBook(bookData);
+        setReviews(reviewsData.content);
         setIsLoading(false);
-        setBook(responseJson);
+
       }
       catch(error){
         setIsLoading(false);
@@ -61,12 +70,13 @@ export const BookCheckoutPage = () => {
           <CheckoutBox book={book!}/>
         </div>
         <hr />
+        <LatestReviews reviews={reviews} bookId={book?.id}/>
       </div>
       {/* Mobile View */}
       <div className="container d-lg-none mt-5">
         <div className="d-flex justify-content-center align-items-center">
           <img
-            src={"/images/book-images/book-1.png"}
+            src={book?.img}
             width="226"
             height="349"
             alt="Book"
@@ -81,6 +91,7 @@ export const BookCheckoutPage = () => {
         </div>
         <CheckoutBox book={book!}/>
         <hr/>
+        <LatestReviews reviews={reviews} bookId={book?.id}/>
       </div>
     </>
   );
