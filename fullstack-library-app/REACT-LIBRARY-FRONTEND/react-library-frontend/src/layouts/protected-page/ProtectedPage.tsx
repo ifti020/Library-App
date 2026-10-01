@@ -1,7 +1,25 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {fetchWithAuth} from "../../services/fetchWithAuth.ts";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ProtectedPage = () => {
     const [response, setResponse] = useState<string>("Loading...");
+
+    useEffect(() => {
+        const fetchProtectedData = async () =>{
+            try{
+                const res = await fetchWithAuth(`${BASE_URL}/protected`);
+                const dat = await res.text();
+                setResponse(dat);
+            }
+            catch (err)
+            {
+                setResponse(`Error : ${err}`);
+            }
+        };
+        fetchProtectedData();
+    },[]);
 
     return (
         <div>
