@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom";
+import {useAuth} from "../../auth/AuthContext.tsx";
 
 export const NavigationBar =() => {
+    const {isAuthenticated, login, logout, user} = useAuth();
     return (
         <nav className="navbar navbar-expand-lg navbar-dark main-color py-3">
             <div className="container-fluid">
@@ -30,11 +32,26 @@ export const NavigationBar =() => {
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item m-1">
-                            <a type="button" className="btn btn-outline-light" href="#">
-                                Sign in
-                            </a>
-                        </li>
+                        {isAuthenticated ? (
+                            <>
+                                <li className="nav-item m-1 d-none d-lg-flex align-items-center">
+                                    <span className="navbar-text text-light me-3">
+                                        Hello, {user?.name || user?.username || "User"}
+                                    </span>
+                                </li>
+                                <li className="nav-item m-1">
+                                    <button className="btn btn-outline-light" type="button" onClick={logout}>
+                                        Sign out
+                                    </button>
+                                </li>     </> ) : (
+
+                                <li className="nav-item m-1">
+                                    <button className="btn btn-outline-light" type="button" onClick={login}>
+                                        Sign in
+                                    </button>
+                                </li>
+                                )
+                        }
                     </ul>
                 </div>
             </div>
