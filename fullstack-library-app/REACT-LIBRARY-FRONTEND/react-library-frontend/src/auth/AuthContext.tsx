@@ -4,6 +4,7 @@ import {createContext, useContext, useEffect, useState} from "react";
 interface User{
     id: string;
     username: string;
+    name?: string;
     email?: string;
     roles?: string[];
 }
@@ -15,6 +16,7 @@ interface  AuthContextType{
     initialized: boolean;
     login(): void;
     logout(): void;
+    register(): void;
 
 }
 
@@ -89,6 +91,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         };
         initKeyCloak();
     }, []);
+
+    const register = () =>{
+        keycloak.register();
+    };
+
+
     const login = () => {
         keycloak.login();
     };
@@ -108,6 +116,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         initialized,
         login,
         logout,
+        register,
     };
     return (
         <AuthContext.Provider value={contextValue}> {children}</AuthContext.Provider>

@@ -43,7 +43,9 @@ export const NavigationBar =() => {
                                     <button className="btn btn-outline-light" type="button" onClick={logout}>
                                         Sign out
                                     </button>
-                                </li>     </> ) : (
+                                </li>
+                            </>
+                        ) : (
 
                                 <li className="nav-item m-1">
                                     <button className="btn btn-outline-light" type="button" onClick={login}>
@@ -51,6 +53,7 @@ export const NavigationBar =() => {
                                     </button>
                                 </li>
                                 )
+
                         }
                     </ul>
                 </div>
